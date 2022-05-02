@@ -1,0 +1,24 @@
+name: 'SWM: Deploy to Azure'
+
+on:
+  push:
+    branches: -master
+
+jobs:
+  build_test:
+    name: 'Build and Test'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set environment variables
+        shell: bash
+        #github.workspace 는 root 디렉토리를 의미함
+        run: |
+          echo "FUNCTION_APP_PATH=${{github.workspace}}/api" >> $GITHUB_ENV
+
+      - name: Check environment variables
+        shell: bash
+        run: |
+          echo $FUNCTION_APP_PATH
+
