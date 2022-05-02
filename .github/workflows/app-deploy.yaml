@@ -61,7 +61,7 @@ jobs:
 
   app_deploy_azure: 
     name: 'Deploy to Azure'
-    need: build_test 
+    needs: build_test 
 
     runs-on: ubuntu-latest
 
