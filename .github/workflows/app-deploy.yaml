@@ -49,6 +49,12 @@ jobs:
       - name: Create Function App artifact 
         shell: bash 
         run: |
-          pushd "${{ env.FUNCTION_APP_PATH}}"
+          pushd "${{ env.FUNCTION_APP_PATH }}"
           dotnet publish . -c Release -o published 
           popd
+
+      - name: Upload Function App artifact 
+        uses: actions/upload-artifact@v2
+        with: 
+          name: apiapp
+          path: ${{env.FUNCTION_APP_PATH}}/published
