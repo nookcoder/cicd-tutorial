@@ -3,7 +3,7 @@ name: 'SWM: Deploy to Azure'
 on:
   push:
     branches: 
-    -main
+    - main
 
 jobs:
   build_test:
@@ -23,3 +23,32 @@ jobs:
         run: |
           echo $FUNCTION_APP_PATH
 
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+      
+      - name: Setup .NET SDK 
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.x'
+
+      - name: Restore NuGet packages 
+        shell: bash 
+        run: |
+          dotnet restore .
+
+      - name: Build Function App 
+        shell: bash
+        run: |
+          dotnet build . -c Release 
+
+      - name: Test Function App 
+        shell: bash 
+        run: |
+          dotnet test . -c Release
+      
+      - name: Create Function App artifact 
+        shell: bash 
+        run: |
+          pushd "${{ env.FUNCTION_APP_PATH}}"
+          dotnet publish . -c Release -o published 
+          popd
