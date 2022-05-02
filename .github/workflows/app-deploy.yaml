@@ -2,7 +2,8 @@ name: 'SWM: Deploy to Azure'
 
 on:
   push:
-    branches: -main
+    branches: 
+    -main
 
 jobs:
   build_test:
