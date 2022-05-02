@@ -81,7 +81,7 @@ jobs:
         echo $FUNCTION_APP_NAME
 
     - name: Download Function App artifact
-      uses: actions/download-artifact@2
+      uses: actions/download-artifact@v3
       with:
         name: apiapp
         path: ${{ env.FUNCTION_APP_PATH }}
@@ -116,4 +116,3 @@ jobs:
         appName: ${{ env.FUNCTION_APP_NAME }}
         reset: true
 
-        
